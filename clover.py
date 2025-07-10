@@ -80,15 +80,13 @@ class CloverAPI:
             end_date = datetime(year, month + 1, 1) - timedelta(seconds=1)
         
         # Convert to Unix timestamps (milliseconds)
-        start_timestamp = int(start_date.timestamp() * 1000)
-        end_timestamp = int(end_date.timestamp() * 1000)
         
         print(f"Fetching batches/closeouts for {calendar.month_name[month]} {year}...")
         print(f"Date range: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
         
         try:
             # Fetch all batches first
-            response = self._make_request('/batches')
+            response = self._make_request('/batches?limit=901')
             all_batches = response.get('elements', [])
             
             # Filter batches by the specified month using createdTime
